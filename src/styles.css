@@ -1,5 +1,5 @@
 :root {
-  font-family: var(--apex-font-family-sans);
+  font-family: var(--corva-font-family-sans);
 }
 
 * {
@@ -14,8 +14,8 @@ body {
   margin: 0;
   min-width: 0;
   overflow-x: hidden;
-  background: var(--apex-color-canvas, var(--apex-color-background));
-  color: var(--apex-color-text, var(--apex-color-foreground));
+  background: var(--corva-color-canvas, var(--corva-color-background));
+  color: var(--corva-color-text, var(--corva-color-foreground));
 }
 
 a {
@@ -24,13 +24,13 @@ a {
 
 .app-shell {
   min-height: 100vh;
-  background: var(--apex-color-canvas, var(--apex-color-background));
+  background: var(--corva-color-canvas, var(--corva-color-background));
 }
 
-apex-data-table,
-apex-data-grid,
-apex-workflow-board,
-apex-toolbar {
+corva-data-table,
+corva-data-grid,
+corva-workflow-board,
+corva-toolbar {
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -39,7 +39,7 @@ apex-toolbar {
 .app-bar-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--apex-space-3, 12px);
+  gap: var(--corva-space-3, 12px);
   align-items: center;
   justify-content: flex-end;
 }
@@ -47,13 +47,13 @@ apex-toolbar {
 .app-main {
   width: min(1480px, 100%);
   margin: 0 auto;
-  padding: var(--apex-space-5, 20px);
+  padding: var(--corva-space-5, 20px);
 }
 
 .app-layout {
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
   align-items: start;
 }
 
@@ -70,22 +70,22 @@ apex-toolbar {
 
 .route-panel {
   display: grid;
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
 }
 
 .page {
   display: grid;
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
 }
 
 .page-heading {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
   align-items: end;
 }
 
-.page-heading apex-typography[variant="body"] {
+.page-heading corva-typography[variant="body"] {
   max-width: 72ch;
 }
 
@@ -93,7 +93,7 @@ apex-toolbar {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--apex-space-3, 12px);
+  gap: var(--corva-space-3, 12px);
   align-items: center;
 }
 
@@ -105,7 +105,7 @@ apex-toolbar {
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
-  gap: var(--apex-space-6, 24px);
+  gap: var(--corva-space-6, 24px);
   align-items: stretch;
 }
 
@@ -114,16 +114,130 @@ apex-toolbar {
   align-items: stretch;
 }
 
+.mobile-menu {
+  display: none;
+}
+
+.immersive-hero,
+.story-photo,
+.dashboard-photo {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--corva-color-border);
+  border-radius: var(--corva-radius-md, 6px);
+  background: var(--corva-color-surface);
+  box-shadow: var(--corva-shadow-lg);
+}
+
+.immersive-hero {
+  min-height: 38rem;
+}
+
+.immersive-hero > img,
+.story-photo img,
+.dashboard-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.68) contrast(1.08);
+}
+
+.immersive-hero > img {
+  position: absolute;
+  inset: 0;
+}
+
+.immersive-hero::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgb(8 12 26 / .92) 0%, rgb(8 12 26 / .72) 48%, rgb(8 12 26 / .14) 78%);
+}
+
+.immersive-hero-copy,
+.hero-proof {
+  position: relative;
+  z-index: 1;
+}
+
+.immersive-hero-copy {
+  display: grid;
+  gap: var(--corva-space-5, 20px);
+  width: min(42rem, 74%);
+  padding: clamp(2rem, 6vw, 5rem);
+  color: #fff;
+}
+
+.immersive-hero-copy corva-typography {
+  color: #fff;
+}
+
+.hero-proof {
+  position: absolute;
+  inset: auto var(--corva-space-5, 20px) var(--corva-space-5, 20px) auto;
+  display: flex;
+  gap: var(--corva-space-4, 16px);
+  align-items: center;
+  padding: var(--corva-space-4, 16px);
+  border: 1px solid rgb(255 255 255 / .2);
+  border-radius: var(--corva-radius-sm, 4px);
+  color: #fff;
+  background: rgb(8 12 26 / .88);
+  backdrop-filter: blur(12px);
+}
+
+.hero-proof span {
+  display: grid;
+  max-width: 11rem;
+  font-size: var(--corva-font-size-sm, .875rem);
+}
+
+.hero-proof strong {
+  font-size: var(--corva-font-size-xl, 1.25rem);
+}
+
+.story-photo,
+.dashboard-photo {
+  min-height: 25rem;
+}
+
+.story-photo img,
+.dashboard-photo img {
+  min-height: 25rem;
+}
+
+.story-photo figcaption,
+.dashboard-photo figcaption {
+  position: absolute;
+  inset: auto var(--corva-space-4, 16px) var(--corva-space-4, 16px);
+  display: grid;
+  gap: var(--corva-space-1, 4px);
+  padding: var(--corva-space-3, 12px) var(--corva-space-4, 16px);
+  border: 1px solid rgb(255 255 255 / .18);
+  border-radius: var(--corva-radius-sm, 4px);
+  color: #fff;
+  background: rgb(8 12 26 / .9);
+}
+
+.story-photo figcaption span,
+.dashboard-photo figcaption span {
+  font-size: var(--corva-font-size-xs, .75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .metric-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--apex-space-4, 16px);
+  gap: var(--corva-space-4, 16px);
 }
 
 .split-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
   align-items: start;
 }
 
@@ -134,17 +248,17 @@ apex-toolbar {
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--apex-space-4, 16px);
+  gap: var(--corva-space-4, 16px);
 }
 
-.dashboard-grid apex-chart {
+.dashboard-grid corva-chart {
   grid-column: span 1;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
-  gap: var(--apex-space-5, 20px);
+  gap: var(--corva-space-5, 20px);
   align-items: start;
 }
 
@@ -159,26 +273,26 @@ apex-toolbar {
 .detail-row {
   display: flex;
   justify-content: space-between;
-  gap: var(--apex-space-4, 16px);
-  padding-block: var(--apex-space-2, 8px);
-  border-bottom: 1px solid var(--apex-color-border);
+  gap: var(--corva-space-4, 16px);
+  padding-block: var(--corva-space-2, 8px);
+  border-bottom: 1px solid var(--corva-color-border);
 }
 
 .detail-row span {
-  color: var(--apex-color-muted);
+  color: var(--corva-color-muted);
 }
 
 .detail-row strong {
-  color: var(--apex-color-text);
+  color: var(--corva-color-text);
   text-align: right;
 }
 
-.apex-list-item span {
+.corva-list-item span {
   min-width: 0;
-  color: var(--apex-color-text, inherit);
+  color: var(--corva-color-text, inherit);
 }
 
-.apex-list-item span + * {
+.corva-list-item span + * {
   color: inherit;
 }
 
@@ -187,14 +301,14 @@ apex-toolbar {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .dashboard-grid apex-chart {
+  .dashboard-grid corva-chart {
     grid-column: span 2;
   }
 }
 
 @media (max-width: 920px) {
   .app-main {
-    padding: var(--apex-space-4, 16px);
+    padding: var(--corva-space-4, 16px);
   }
 
   .app-layout,
@@ -217,7 +331,7 @@ apex-toolbar {
 
 @media (max-width: 620px) {
   .app-main {
-    padding: var(--apex-space-3, 12px);
+    padding: var(--corva-space-3, 12px);
   }
 
   .app-bar-actions {
@@ -228,12 +342,69 @@ apex-toolbar {
     grid-template-columns: 1fr;
   }
 
-  .dashboard-grid apex-chart {
+  .dashboard-grid corva-chart {
     grid-column: auto;
   }
 
   .button-link,
-  .button-link apex-button {
+  .button-link corva-button {
     width: 100%;
   }
+
+  .app-layout > corva-sidebar {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+    margin: var(--corva-space-3, 12px) var(--corva-space-4, 16px) 0;
+    padding: var(--corva-space-3, 12px) var(--corva-space-4, 16px);
+    border: 1px solid var(--corva-color-border);
+    border-radius: var(--corva-radius-sm, 4px);
+    background: var(--corva-color-surface);
+  }
+
+  .mobile-menu summary {
+    color: var(--corva-color-text);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .mobile-menu nav {
+    display: grid;
+    gap: var(--corva-space-1, 4px);
+    padding-top: var(--corva-space-3, 12px);
+  }
+
+  .mobile-menu a {
+    padding: var(--corva-space-2, 8px) var(--corva-space-3, 12px);
+    border-radius: var(--corva-radius-sm, 4px);
+    color: var(--corva-color-muted);
+    text-decoration: none;
+  }
+
+  .mobile-menu a[aria-current="page"] {
+    color: var(--corva-color-text);
+    background: var(--corva-color-subtle);
+  }
+
+  .immersive-hero {
+    min-height: 44rem;
+  }
+
+  .immersive-hero-copy {
+    width: 100%;
+    padding: var(--corva-space-5, 20px);
+  }
+
+  .hero-proof {
+    inset: auto var(--corva-space-3, 12px) var(--corva-space-3, 12px);
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.section-rule {
+  height: 1px;
+  background: var(--corva-color-border);
 }

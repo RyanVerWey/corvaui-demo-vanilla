@@ -1,21 +1,36 @@
-<main class="app-shell" data-apex-theme="indigo-dark" id="app-shell">
-  <apex-app-bar heading="Northstar Field Services">
-    <div class="app-bar-actions" slot="actions">
-      <apex-badge tone="info" id="theme-badge">indigo-dark</apex-badge>
-      <apex-button-group label="Theme mode">
-        <apex-button id="theme-light" size="sm" variant="secondary">Light</apex-button>
-        <apex-button id="theme-dark" size="sm">Dark</apex-button>
-      </apex-button-group>
-    </div>
-  </apex-app-bar>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CorvaUI Vanilla Demo</title>
+  </head>
+  <body>
+    <main class="app-shell" data-corva-theme="indigo-dark" id="app-shell">
+      <corva-app-bar heading="CorvaUI Operations">
+        <div class="app-bar-actions" slot="actions">
+          <corva-badge tone="info" id="theme-badge">indigo-dark</corva-badge>
+          <corva-button-group label="Theme mode">
+            <corva-button id="theme-light" size="sm" variant="secondary">Light</corva-button>
+            <corva-button id="theme-dark" size="sm">Dark</corva-button>
+          </corva-button-group>
+        </div>
+      </corva-app-bar>
 
-  <div class="app-main">
-    <div class="app-layout">
-      <apex-sidebar id="nav" heading="Northstar" label="Site sections"></apex-sidebar>
-      <section class="route-panel" id="route-view" aria-live="polite"></section>
-    </div>
-  </div>
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav id="mobile-nav" aria-label="Mobile navigation"></nav>
+      </details>
 
-  <apex-snackbar id="snackbar" tone="success"></apex-snackbar>
-</main>
-<script type="module" src="/src/main.ts"></script>
+      <div class="app-main">
+        <div class="app-layout">
+          <corva-sidebar id="nav" heading="CorvaUI" label="Site sections"></corva-sidebar>
+          <section class="route-panel" id="route-view" aria-live="polite"></section>
+        </div>
+      </div>
+
+      <corva-snackbar id="snackbar" tone="success"></corva-snackbar>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

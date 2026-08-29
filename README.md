@@ -1,3 +1,3 @@
-# ApexUI Vanilla Demo
+# CorvaUI Vanilla Demo
 
-Public GitHub Pages demo using ApexUI custom elements without a framework.
+Public Vercel demo using CorvaUI custom elements without a framework.

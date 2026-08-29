@@ -1,2 +1,2 @@
 import { defineConfig } from 'vite';
-export default defineConfig({ base: '/apexui-demo-vanilla/' });
+export default defineConfig({ base: '/' });

@@ -1,45 +1,45 @@
-import "@apexui/tokens/css";
-import "@apexui/web-components/components/apex-accordion.js";
-import "@apexui/web-components/components/apex-alert.js";
-import "@apexui/web-components/components/apex-app-bar.js";
-import "@apexui/web-components/components/apex-autocomplete.js";
-import "@apexui/web-components/components/apex-badge.js";
-import "@apexui/web-components/components/apex-breadcrumbs.js";
-import "@apexui/web-components/components/apex-button.js";
-import "@apexui/web-components/components/apex-button-group.js";
-import "@apexui/web-components/components/apex-calendar.js";
-import "@apexui/web-components/components/apex-card.js";
-import "@apexui/web-components/components/apex-chart.js";
-import "@apexui/web-components/components/apex-checkbox.js";
-import "@apexui/web-components/components/apex-chip.js";
-import "@apexui/web-components/components/apex-data-grid.js";
-import "@apexui/web-components/components/apex-data-table.js";
-import "@apexui/web-components/components/apex-date-picker.js";
-import "@apexui/web-components/components/apex-divider.js";
-import "@apexui/web-components/components/apex-file-upload.js";
-import "@apexui/web-components/components/apex-list.js";
-import "@apexui/web-components/components/apex-number-field.js";
-import "@apexui/web-components/components/apex-paper.js";
-import "@apexui/web-components/components/apex-progress.js";
-import "@apexui/web-components/components/apex-radio-group.js";
-import "@apexui/web-components/components/apex-search-form.js";
-import "@apexui/web-components/components/apex-select.js";
-import "@apexui/web-components/components/apex-sidebar.js";
-import "@apexui/web-components/components/apex-slider.js";
-import "@apexui/web-components/components/apex-snackbar.js";
-import "@apexui/web-components/components/apex-stack.js";
-import "@apexui/web-components/components/apex-stepper.js";
-import "@apexui/web-components/components/apex-switch.js";
-import "@apexui/web-components/components/apex-tabs.js";
-import "@apexui/web-components/components/apex-text-field.js";
-import "@apexui/web-components/components/apex-textarea.js";
-import "@apexui/web-components/components/apex-time-picker.js";
-import "@apexui/web-components/components/apex-timeline.js";
-import "@apexui/web-components/components/apex-toggle-group.js";
-import "@apexui/web-components/components/apex-toolbar.js";
-import "@apexui/web-components/components/apex-tree-view.js";
-import "@apexui/web-components/components/apex-typography.js";
-import "@apexui/web-components/components/apex-workflow-board.js";
+import "@corvaui/tokens/css";
+import "@corvaui/web-components/components/corva-accordion.js";
+import "@corvaui/web-components/components/corva-alert.js";
+import "@corvaui/web-components/components/corva-app-bar.js";
+import "@corvaui/web-components/components/corva-autocomplete.js";
+import "@corvaui/web-components/components/corva-badge.js";
+import "@corvaui/web-components/components/corva-breadcrumbs.js";
+import "@corvaui/web-components/components/corva-button.js";
+import "@corvaui/web-components/components/corva-button-group.js";
+import "@corvaui/web-components/components/corva-calendar.js";
+import "@corvaui/web-components/components/corva-card.js";
+import "@corvaui/web-components/components/corva-chart.js";
+import "@corvaui/web-components/components/corva-checkbox.js";
+import "@corvaui/web-components/components/corva-chip.js";
+import "@corvaui/web-components/components/corva-data-grid.js";
+import "@corvaui/web-components/components/corva-data-table.js";
+import "@corvaui/web-components/components/corva-date-picker.js";
+import "@corvaui/web-components/components/corva-divider.js";
+import "@corvaui/web-components/components/corva-file-upload.js";
+import "@corvaui/web-components/components/corva-list.js";
+import "@corvaui/web-components/components/corva-number-field.js";
+import "@corvaui/web-components/components/corva-paper.js";
+import "@corvaui/web-components/components/corva-progress.js";
+import "@corvaui/web-components/components/corva-radio-group.js";
+import "@corvaui/web-components/components/corva-search-form.js";
+import "@corvaui/web-components/components/corva-select.js";
+import "@corvaui/web-components/components/corva-sidebar.js";
+import "@corvaui/web-components/components/corva-slider.js";
+import "@corvaui/web-components/components/corva-snackbar.js";
+import "@corvaui/web-components/components/corva-stack.js";
+import "@corvaui/web-components/components/corva-stepper.js";
+import "@corvaui/web-components/components/corva-switch.js";
+import "@corvaui/web-components/components/corva-tabs.js";
+import "@corvaui/web-components/components/corva-text-field.js";
+import "@corvaui/web-components/components/corva-textarea.js";
+import "@corvaui/web-components/components/corva-time-picker.js";
+import "@corvaui/web-components/components/corva-timeline.js";
+import "@corvaui/web-components/components/corva-toggle-group.js";
+import "@corvaui/web-components/components/corva-toolbar.js";
+import "@corvaui/web-components/components/corva-tree-view.js";
+import "@corvaui/web-components/components/corva-typography.js";
+import "@corvaui/web-components/components/corva-workflow-board.js";
 import "./styles.css";
 
 type ThemeMode = "light" | "dark";
@@ -73,6 +73,7 @@ const sidebar = document.querySelector("#nav") as DataElement<{
   items?: Array<{ badge?: string; href?: string; id: string; label: string }>;
 }>;
 const snackbar = document.querySelector("#snackbar") as DataElement<{ open?: boolean; tone?: Tone }>;
+const mobileNav = document.querySelector("#mobile-nav") as HTMLElement;
 
 snackbar.open = false;
 sidebar.items = routes.map((route) => ({
@@ -81,6 +82,7 @@ sidebar.items = routes.map((route) => ({
   id: route.id,
   label: route.label,
 }));
+mobileNav.innerHTML = routes.map((route) => `<a href="${routeHref(route.id)}">${route.label}</a>`).join("");
 
 function routeHref(route: RouteId) {
   return route === "home" ? "#/" : `#/${route}`;
@@ -94,7 +96,7 @@ function readRoute(): RouteId {
 
 function setTheme(mode: ThemeMode) {
   const theme = `indigo-${mode}`;
-  appShell.dataset.apexTheme = theme;
+  appShell.dataset.corvaTheme = theme;
   themeBadge.textContent = theme;
   lightButton.setAttribute("variant", mode === "light" ? "primary" : "secondary");
   darkButton.setAttribute("variant", mode === "dark" ? "primary" : "secondary");
@@ -170,7 +172,7 @@ function setBreadcrumbs(current: RouteDefinition) {
   }> | null;
   if (crumbs) {
     crumbs.items = [
-      { href: "#/", label: "Northstar" },
+      { href: "#/", label: "CorvaUI" },
       { current: true, label: current.title },
     ];
   }
@@ -180,6 +182,10 @@ function render() {
   const route = readRoute();
   const definition = routes.find((item) => item.id === route) ?? routes[0];
   sidebar.activeId = route;
+  mobileNav.querySelectorAll("a").forEach((link) => {
+    if (link.getAttribute("href") === routeHref(route)) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
   routeView.innerHTML = templates[route]();
   setBreadcrumbs(definition);
   configureRoute(route);
@@ -189,19 +195,19 @@ function render() {
 function pageShell(route: RouteId, eyebrow: string, title: string, body: string, content: string) {
   return `
     <div class="page">
-      <apex-breadcrumbs id="breadcrumbs" label="Page trail"></apex-breadcrumbs>
+      <corva-breadcrumbs id="breadcrumbs" label="Page trail"></corva-breadcrumbs>
       <div class="page-heading">
-        <apex-stack gap="sm">
-          <apex-badge tone="info">${eyebrow}</apex-badge>
-          <apex-typography as="h1" variant="display">${title}</apex-typography>
-          <apex-typography variant="body">${body}</apex-typography>
-        </apex-stack>
+        <corva-stack gap="sm">
+          <corva-badge tone="info">${eyebrow}</corva-badge>
+          <corva-typography as="h1" variant="display">${title}</corva-typography>
+          <corva-typography variant="body">${body}</corva-typography>
+        </corva-stack>
         <div class="page-heading-actions">
           <a class="button-link" href="${routeHref(route === "home" ? "dashboard" : "work-orders")}">
-            <apex-button>${route === "home" ? "Open dashboard" : "New work order"}</apex-button>
+            <corva-button>${route === "home" ? "Open dashboard" : "New work order"}</corva-button>
           </a>
           <a class="button-link" href="${routeHref("about")}">
-            <apex-button variant="secondary">Package proof</apex-button>
+            <corva-button variant="secondary">Package proof</corva-button>
           </a>
         </div>
       </div>
@@ -215,58 +221,59 @@ const templates: Record<RouteId, () => string> = {
     pageShell(
       "home",
       "Regional service operations",
-      "Premium field teams run tighter days with Northstar.",
-      "Northstar Field Services coordinates dispatch, customer records, compliance notes, and executive reporting for regional HVAC, utility, and facilities teams.",
+      "Northstar gives distributed field teams one clear operating picture.",
+      "A framework-free CorvaUI application for mobile technicians, dispatch leads, asset owners, and control-room teams who need speed without sacrificing rigor.",
       `
-        <apex-paper elevation="sm">
-          <div class="hero-grid">
-            <apex-stack gap="lg">
-              <apex-typography as="h2" variant="title">One operating desk from first call to closeout.</apex-typography>
-              <apex-typography variant="body">Dispatchers see capacity, managers see risk, and technicians get cleaner work packets without pulling teams into a heavyweight enterprise suite.</apex-typography>
-              <div class="hero-actions">
-                <a class="button-link" href="${routeHref("work-orders")}"><apex-button size="lg">Create sample order</apex-button></a>
-                <a class="button-link" href="${routeHref("customers")}"><apex-button size="lg" variant="secondary">Review customers</apex-button></a>
-              </div>
-            </apex-stack>
-            <div class="proof-panel">
-              <apex-card eyebrow="Customer proof" heading="41% faster same-day scheduling">
-                <apex-list>
-                  <li class="apex-list-item"><span>MetroGrid Facilities</span><apex-badge tone="success">Live</apex-badge></li>
-                  <li class="apex-list-item"><span>Harborline Utilities</span><apex-badge tone="info">Rollout</apex-badge></li>
-                  <li class="apex-list-item"><span>PrairieCare Campuses</span><apex-badge tone="warning">Pilot</apex-badge></li>
-                </apex-list>
-              </apex-card>
+        <section class="immersive-hero" aria-labelledby="northstar-story-title">
+          <img src="/images/northstar-workshop.jpg" alt="A mobile field workshop prepared with tools and service equipment" />
+          <div class="immersive-hero-copy">
+            <corva-badge tone="success">Field network online</corva-badge>
+            <corva-typography id="northstar-story-title" as="h2" variant="title">One operating desk from first call to verified closeout.</corva-typography>
+            <corva-typography variant="body">Dispatchers see capacity, technicians receive complete work packets, and leaders see risk without adding a framework runtime.</corva-typography>
+            <div class="hero-actions">
+              <a class="button-link" href="${routeHref("work-orders")}"><corva-button size="lg">Create sample order</corva-button></a>
+              <a class="button-link" href="${routeHref("dashboard")}"><corva-button size="lg" variant="secondary">Open control room</corva-button></a>
             </div>
           </div>
-        </apex-paper>
+          <div class="hero-proof" aria-label="Network proof">
+            <span><strong>41%</strong> faster same-day scheduling</span>
+            <span><strong>96%</strong> work packets complete</span>
+            <corva-badge tone="info">Indigo tokens</corva-badge>
+          </div>
+        </section>
 
         <div class="metric-strip">
-          <apex-card eyebrow="Booked capacity" heading="86%">
-            <apex-progress label="Weekly crew allocation" value="86"></apex-progress>
-          </apex-card>
-          <apex-card eyebrow="Open work" heading="124 orders">
-            <apex-progress label="Orders with owner" value="91"></apex-progress>
-          </apex-card>
-          <apex-card eyebrow="Customer health" heading="22 at risk">
-            <apex-progress label="Renewal rescue plan" value="64"></apex-progress>
-          </apex-card>
+          <corva-card eyebrow="Booked capacity" heading="86%">
+            <corva-progress label="Weekly crew allocation" value="86"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="Open work" heading="124 orders">
+            <corva-progress label="Orders with owner" value="91"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="Customer health" heading="22 at risk">
+            <corva-progress label="Renewal rescue plan" value="64"></corva-progress>
+          </corva-card>
         </div>
 
         <div class="split-grid">
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Offer</apex-typography>
-              <apex-list>
-                <li class="apex-list-item"><span>Dispatch planning with capacity and SLA context</span><apex-badge tone="info">Plan</apex-badge></li>
-                <li class="apex-list-item"><span>Work order packets with parts, access, and safety notes</span><apex-badge tone="success">Do</apex-badge></li>
-                <li class="apex-list-item"><span>Customer pipeline records tied to revenue and renewals</span><apex-badge tone="neutral">Grow</apex-badge></li>
-              </apex-list>
-            </apex-stack>
-          </apex-paper>
-          <apex-chart id="home-chart" label="Northstar rollout results"></apex-chart>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Offer</corva-typography>
+              <corva-list>
+                <li class="corva-list-item"><span>Dispatch planning with capacity and SLA context</span><corva-badge tone="info">Plan</corva-badge></li>
+                <li class="corva-list-item"><span>Work order packets with parts, access, and safety notes</span><corva-badge tone="success">Do</corva-badge></li>
+                <li class="corva-list-item"><span>Customer pipeline records tied to revenue and renewals</span><corva-badge tone="neutral">Grow</corva-badge></li>
+              </corva-list>
+            </corva-stack>
+          </corva-paper>
+          <corva-chart id="home-chart" label="CorvaUI rollout results"></corva-chart>
         </div>
 
-        <apex-alert tone="success" heading="Proof path">This demo uses a vanilla hash router, ApexUI web components, and indigo light/dark token themes.</apex-alert>
+        <figure class="story-photo">
+          <img src="/images/northstar-control-room.jpg" alt="Operational control room with monitoring panels and equipment" />
+          <figcaption><span>Connected operations</span><strong>Field evidence becomes control-room context without translation.</strong></figcaption>
+        </figure>
+
+        <corva-alert tone="success" heading="Proof path">This demo uses a vanilla hash router, CorvaUI web components, and indigo light/dark token themes.</corva-alert>
       `,
     ),
 
@@ -277,36 +284,41 @@ const templates: Record<RouteId, () => string> = {
       "Live metrics for crew capacity, SLA risk, and daily closeout.",
       "This route uses charts, tables, progress, workflow status, and scheduling widgets to model a real dispatcher dashboard.",
       `
-        <apex-toolbar label="Dashboard actions" justify="between" wrap>
-          <apex-button size="sm" id="refresh-dashboard">Refresh signals</apex-button>
-          <apex-button size="sm" variant="secondary">Export board</apex-button>
-          <apex-badge tone="success">07:42 sync</apex-badge>
-        </apex-toolbar>
+        <corva-toolbar label="Dashboard actions" justify="between" wrap>
+          <corva-button size="sm" id="refresh-dashboard">Refresh signals</corva-button>
+          <corva-button size="sm" variant="secondary">Export board</corva-button>
+          <corva-badge tone="success">07:42 sync</corva-badge>
+        </corva-toolbar>
 
         <div class="dashboard-grid">
-          <apex-card eyebrow="SLA protection" heading="94%">
-            <apex-progress label="Jobs on protected schedule" value="94"></apex-progress>
-          </apex-card>
-          <apex-card eyebrow="First visit fix" heading="78%">
-            <apex-progress label="Resolved without return trip" value="78"></apex-progress>
-          </apex-card>
-          <apex-card eyebrow="Safety packet" heading="19 gaps">
-            <apex-progress label="Orders ready for dispatch" value="69"></apex-progress>
-          </apex-card>
-          <apex-chart id="dashboard-chart" label="Crew capacity by region"></apex-chart>
+          <corva-card eyebrow="SLA protection" heading="94%">
+            <corva-progress label="Jobs on protected schedule" value="94"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="First visit fix" heading="78%">
+            <corva-progress label="Resolved without return trip" value="78"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="Safety packet" heading="19 gaps">
+            <corva-progress label="Orders ready for dispatch" value="69"></corva-progress>
+          </corva-card>
+          <corva-chart id="dashboard-chart" label="Crew capacity by region"></corva-chart>
         </div>
+
+        <figure class="dashboard-photo">
+          <img src="/images/northstar-control-room.jpg" alt="Control room used to coordinate field operations" />
+          <figcaption><span>Regional desk</span><strong>Exceptions, ownership, and readiness stay visible.</strong></figcaption>
+        </figure>
 
         <div class="split-grid wide-left">
-          <apex-data-table id="dashboard-table" caption="High priority work orders"></apex-data-table>
-          <apex-calendar label="June dispatch board" month-label="June 2026"></apex-calendar>
+          <corva-data-table id="dashboard-table" caption="High priority work orders"></corva-data-table>
+          <corva-calendar label="June dispatch board" month-label="June 2026"></corva-calendar>
         </div>
 
-        <apex-paper>
-          <apex-stack gap="md">
-            <apex-typography as="h2" variant="title">Workflow board</apex-typography>
-            <apex-workflow-board id="dispatch-board"></apex-workflow-board>
-          </apex-stack>
-        </apex-paper>
+        <corva-paper>
+          <corva-stack gap="md">
+            <corva-typography as="h2" variant="title">Workflow board</corva-typography>
+            <corva-workflow-board id="dispatch-board"></corva-workflow-board>
+          </corva-stack>
+        </corva-paper>
       `,
     ),
 
@@ -318,31 +330,31 @@ const templates: Record<RouteId, () => string> = {
       "The sample form validates required customer, site, date, and problem fields before showing a saved state.",
       `
         <form class="form-grid" id="work-order-form" novalidate>
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Request details</apex-typography>
-              <apex-text-field id="wo-customer" label="Customer" name="customer" value="Harborline Utilities" hint="Account or organization"></apex-text-field>
-              <apex-text-field id="wo-site" label="Service site" name="site" placeholder="Facility, address, or asset tag" hint="Required for dispatch"></apex-text-field>
-              <apex-textarea id="wo-problem" label="Problem summary" name="problem" rows="5" placeholder="Describe failure, access notes, and visible hazards"></apex-textarea>
-              <apex-file-upload id="wo-files" label="Field evidence" action-label="Attach files" description="PDF, JPG, PNG up to 10 MB" accept=".pdf,.jpg,.jpeg,.png" multiple></apex-file-upload>
-            </apex-stack>
-          </apex-paper>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Request details</corva-typography>
+              <corva-text-field id="wo-customer" label="Customer" name="customer" value="Harborline Utilities" hint="Account or organization"></corva-text-field>
+              <corva-text-field id="wo-site" label="Service site" name="site" placeholder="Facility, address, or asset tag" hint="Required for dispatch"></corva-text-field>
+              <corva-textarea id="wo-problem" label="Problem summary" name="problem" rows="5" placeholder="Describe failure, access notes, and visible hazards"></corva-textarea>
+              <corva-file-upload id="wo-files" label="Field evidence" action-label="Attach files" description="PDF, JPG, PNG up to 10 MB" accept=".pdf,.jpg,.jpeg,.png" multiple></corva-file-upload>
+            </corva-stack>
+          </corva-paper>
 
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Dispatch plan</apex-typography>
-              <apex-date-picker id="wo-date" label="Target date" name="targetDate" value="2026-06-18" hint="Crew commitment date"></apex-date-picker>
-              <apex-time-picker id="wo-time" label="Arrival window" name="arrival" value="09:30" hint="Local site time"></apex-time-picker>
-              <apex-select id="wo-region" label="Region" name="region" value="north" hint="Routes the order to a dispatcher"></apex-select>
-              <apex-autocomplete id="wo-owner" label="Lead technician" placeholder="Select technician" value="Maya Chen" hint="Optional until scheduled"></apex-autocomplete>
-              <apex-radio-group id="wo-priority" label="Priority" name="priority" value="same-day"></apex-radio-group>
-              <apex-checkbox label="Customer has confirmed access window" checked></apex-checkbox>
-              <apex-button type="submit">Save work order</apex-button>
-            </apex-stack>
-          </apex-paper>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Dispatch plan</corva-typography>
+              <corva-date-picker id="wo-date" label="Target date" name="targetDate" value="2026-06-18" hint="Crew commitment date"></corva-date-picker>
+              <corva-time-picker id="wo-time" label="Arrival window" name="arrival" value="09:30" hint="Local site time"></corva-time-picker>
+              <corva-select id="wo-region" label="Region" name="region" value="north" hint="Routes the order to a dispatcher"></corva-select>
+              <corva-autocomplete id="wo-owner" label="Lead technician" placeholder="Select technician" value="Maya Chen" hint="Optional until scheduled"></corva-autocomplete>
+              <corva-radio-group id="wo-priority" label="Priority" name="priority" value="same-day"></corva-radio-group>
+              <corva-checkbox label="Customer has confirmed access window" checked></corva-checkbox>
+              <corva-button type="submit">Save work order</corva-button>
+            </corva-stack>
+          </corva-paper>
         </form>
 
-        <apex-stepper id="wo-stepper" active-index="1"></apex-stepper>
+        <corva-stepper id="wo-stepper" active-index="1"></corva-stepper>
       `,
     ),
 
@@ -353,36 +365,36 @@ const templates: Record<RouteId, () => string> = {
       "Pipeline, records, and account detail in one route.",
       "Account managers can scan renewals, sort active records, and inspect work history patterns without leaving the customer workspace.",
       `
-        <apex-toolbar label="Customer tools" wrap>
-          <apex-search-form id="customer-search" label="Find customer" placeholder="Search company, region, owner"></apex-search-form>
-          <apex-button size="sm" variant="secondary">Import accounts</apex-button>
-          <apex-button size="sm">Add record</apex-button>
-        </apex-toolbar>
+        <corva-toolbar label="Customer tools" wrap>
+          <corva-search-form id="customer-search" label="Find customer" placeholder="Search company, region, owner"></corva-search-form>
+          <corva-button size="sm" variant="secondary">Import accounts</corva-button>
+          <corva-button size="sm">Add record</corva-button>
+        </corva-toolbar>
 
         <div class="split-grid wide-left">
-          <apex-data-grid id="customer-grid" caption="Customer records"></apex-data-grid>
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Harborline Utilities</apex-typography>
+          <corva-data-grid id="customer-grid" caption="Customer records"></corva-data-grid>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Harborline Utilities</corva-typography>
               <div class="detail-row"><span>Owner</span><strong>Priya Kapoor</strong></div>
               <div class="detail-row"><span>Renewal</span><strong>2026-09-30</strong></div>
               <div class="detail-row"><span>Open work</span><strong>18 orders</strong></div>
-              <apex-divider decorative></apex-divider>
-              <apex-list>
-                <li class="apex-list-item"><span>North substations access list refreshed</span><apex-badge tone="success">Done</apex-badge></li>
-                <li class="apex-list-item"><span>Generator inspection needs quote approval</span><apex-badge tone="warning">Risk</apex-badge></li>
-                <li class="apex-list-item"><span>Q3 capacity review scheduled</span><apex-badge tone="info">Next</apex-badge></li>
-              </apex-list>
-            </apex-stack>
-          </apex-paper>
+              <div class="section-rule" role="presentation"></div>
+              <corva-list>
+                <li class="corva-list-item"><span>North substations access list refreshed</span><corva-badge tone="success">Done</corva-badge></li>
+                <li class="corva-list-item"><span>Generator inspection needs quote approval</span><corva-badge tone="warning">Risk</corva-badge></li>
+                <li class="corva-list-item"><span>Q3 capacity review scheduled</span><corva-badge tone="info">Next</corva-badge></li>
+              </corva-list>
+            </corva-stack>
+          </corva-paper>
         </div>
 
-        <apex-paper>
-          <apex-stack gap="md">
-            <apex-typography as="h2" variant="title">Pipeline board</apex-typography>
-            <apex-workflow-board id="customer-board"></apex-workflow-board>
-          </apex-stack>
-        </apex-paper>
+        <corva-paper>
+          <corva-stack gap="md">
+            <corva-typography as="h2" variant="title">Pipeline board</corva-typography>
+            <corva-workflow-board id="customer-board"></corva-workflow-board>
+          </corva-stack>
+        </corva-paper>
       `,
     ),
 
@@ -393,32 +405,32 @@ const templates: Record<RouteId, () => string> = {
       "Preferences for identity, notification policy, locale, and theme.",
       "Settings demonstrate tabs, toggles, selection controls, sliders, and theme mode updates inside the same token scope.",
       `
-        <apex-tabs id="settings-tabs" label="Settings sections" active-id="profile"></apex-tabs>
+        <corva-tabs id="settings-tabs" label="Settings sections" active-id="profile"></corva-tabs>
 
         <div class="split-grid">
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Profile</apex-typography>
-              <apex-text-field label="Workspace name" value="Northstar Field Services"></apex-text-field>
-              <apex-text-field label="Account owner" value="Maya Chen"></apex-text-field>
-              <apex-select id="settings-locale" label="Locale" value="en-us" hint="Used for date and number formatting"></apex-select>
-              <apex-toggle-group id="settings-theme" label="Theme mode"></apex-toggle-group>
-            </apex-stack>
-          </apex-paper>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Profile</corva-typography>
+              <corva-text-field label="Workspace name" value="CorvaUI Field Services"></corva-text-field>
+              <corva-text-field label="Account owner" value="Maya Chen"></corva-text-field>
+              <corva-select id="settings-locale" label="Locale" value="en-us" hint="Used for date and number formatting"></corva-select>
+              <corva-toggle-group id="settings-theme" label="Theme mode"></corva-toggle-group>
+            </corva-stack>
+          </corva-paper>
 
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Preferences</apex-typography>
-              <apex-switch label="Notify dispatcher when SLA risk changes" checked></apex-switch>
-              <apex-switch label="Require photo evidence before closeout" checked></apex-switch>
-              <apex-switch label="Send daily customer health digest"></apex-switch>
-              <apex-slider label="Default drive buffer minutes" min="5" max="45" step="5" value="20"></apex-slider>
-              <apex-button id="save-settings">Save settings</apex-button>
-            </apex-stack>
-          </apex-paper>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Preferences</corva-typography>
+              <corva-switch label="Notify dispatcher when SLA risk changes" checked></corva-switch>
+              <corva-switch label="Require photo evidence before closeout" checked></corva-switch>
+              <corva-switch label="Send daily customer health digest"></corva-switch>
+              <corva-slider label="Default drive buffer minutes" min="5" max="45" step="5" value="20"></corva-slider>
+              <corva-button id="save-settings">Save settings</corva-button>
+            </corva-stack>
+          </corva-paper>
         </div>
 
-        <apex-alert tone="info" heading="Theme scope">The assigned theme defaults to indigo-dark. The toggle switches the same ApexUI token family to indigo-light.</apex-alert>
+        <corva-alert tone="info" heading="Theme scope">The assigned theme defaults to indigo-dark. The toggle switches the same CorvaUI token family to indigo-light.</corva-alert>
       `,
     ),
 
@@ -427,30 +439,30 @@ const templates: Record<RouteId, () => string> = {
       "about",
       "Implementation proof",
       "Installed packages, routing strategy, and framework integration notes.",
-      "This route is a proof page for reviewers: it describes how the vanilla demo consumes ApexUI packages without adding a framework runtime.",
+      "This route is a proof page for reviewers: it describes how the vanilla demo consumes CorvaUI packages without adding a framework runtime.",
       `
         <div class="split-grid wide-left">
-          <apex-paper>
-            <apex-stack gap="md">
-              <apex-typography as="h2" variant="title">Package proof</apex-typography>
-              <apex-data-table id="package-table" caption="Installed ApexUI packages"></apex-data-table>
-            </apex-stack>
-          </apex-paper>
-          <apex-card eyebrow="Router" heading="Small hash router">
-            <apex-list ordered>
-              <li class="apex-list-item"><span>Read location hash</span><apex-badge tone="success">Vanilla</apex-badge></li>
-              <li class="apex-list-item"><span>Render route template</span><apex-badge tone="info">TypeScript</apex-badge></li>
-              <li class="apex-list-item"><span>Assign ApexUI component data</span><apex-badge tone="success">Props</apex-badge></li>
-            </apex-list>
-          </apex-card>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Package proof</corva-typography>
+              <corva-data-table id="package-table" caption="Installed CorvaUI packages"></corva-data-table>
+            </corva-stack>
+          </corva-paper>
+          <corva-card eyebrow="Router" heading="Small hash router">
+            <corva-list ordered>
+              <li class="corva-list-item"><span>Read location hash</span><corva-badge tone="success">Vanilla</corva-badge></li>
+              <li class="corva-list-item"><span>Render route template</span><corva-badge tone="info">TypeScript</corva-badge></li>
+              <li class="corva-list-item"><span>Assign CorvaUI component data</span><corva-badge tone="success">Props</corva-badge></li>
+            </corva-list>
+          </corva-card>
         </div>
 
         <div class="split-grid">
-          <apex-timeline id="about-timeline"></apex-timeline>
-          <apex-tree-view id="about-tree" label="Integration map"></apex-tree-view>
+          <corva-timeline id="about-timeline"></corva-timeline>
+          <corva-tree-view id="about-tree" label="Integration map"></corva-tree-view>
         </div>
 
-        <apex-alert tone="success" heading="No framework dependency">The route shell is plain DOM, local CSS composes layout, and all controls are ApexUI web components.</apex-alert>
+        <corva-alert tone="success" heading="No framework dependency">The route shell is plain DOM, local CSS composes layout, and all controls are CorvaUI web components.</corva-alert>
       `,
     ),
 };
@@ -557,7 +569,7 @@ function configureRoute(route: RouteId) {
   }
 
   if (route === "settings") {
-    const storedTheme = appShell.dataset.apexTheme === "indigo-light" ? "light" : "dark";
+    const storedTheme = appShell.dataset.corvaTheme === "indigo-light" ? "light" : "dark";
     setOptions("#settings-locale", [
       { label: "English (United States)", value: "en-us" },
       { label: "English (Canada)", value: "en-ca" },
@@ -570,7 +582,7 @@ function configureRoute(route: RouteId) {
     const themeToggle = routeView.querySelector("#settings-theme") as DataElement<{ value?: string }> | null;
     if (themeToggle) {
       themeToggle.value = storedTheme;
-      themeToggle.addEventListener("apexChange", (event) => {
+      themeToggle.addEventListener("corvaChange", (event) => {
         const nextMode = (event as CustomEvent<{ value: ThemeMode }>).detail.value;
         setTheme(nextMode);
       });
@@ -597,15 +609,15 @@ function configureRoute(route: RouteId) {
         { key: "proof", header: "Proof" },
       ],
       [
-        { package: "@apexui/web-components", proof: "Direct custom element imports", usage: "Controls and data display" },
-        { package: "@apexui/tokens", proof: "data-apex-theme scope", usage: "Indigo light/dark themes" },
-        { package: "vite", proof: "Static GitHub Pages build", usage: "Vanilla TypeScript bundling" },
+        { package: "@corvaui/web-components", proof: "Direct custom element imports", usage: "Controls and data display" },
+        { package: "@corvaui/tokens", proof: "data-corva-theme scope", usage: "Indigo light/dark themes" },
+        { package: "vite", proof: "Static Vercel build", usage: "Vanilla TypeScript bundling" },
       ],
     );
     setTimeline("#about-timeline", [
       { description: "Hash is parsed into a RouteId", id: "hash", label: "Route", meta: "router" },
       { description: "Template HTML is rendered into the route view", id: "render", label: "Render", meta: "DOM" },
-      { description: "ApexUI props receive typed rows, charts, options, and board data", id: "hydrate", label: "Hydrate", meta: "components" },
+      { description: "CorvaUI props receive typed rows, charts, options, and board data", id: "hydrate", label: "Hydrate", meta: "components" },
     ]);
     const tree = routeView.querySelector("#about-tree") as DataElement<{
       items?: Array<{ children?: Array<{ id: string; label: string }>; id: string; label: string }>;
@@ -614,8 +626,8 @@ function configureRoute(route: RouteId) {
       tree.items = [
         {
           children: [
-            { id: "components", label: "@apexui/web-components" },
-            { id: "tokens", label: "@apexui/tokens/css" },
+            { id: "components", label: "@corvaui/web-components" },
+            { id: "tokens", label: "@corvaui/tokens/css" },
           ],
           id: "packages",
           label: "Installed packages",
@@ -631,6 +643,20 @@ function configureRoute(route: RouteId) {
       ];
     }
   }
+
+  window.setTimeout(() => {
+    routeView.querySelectorAll<HTMLElement>(".corva-table-container").forEach((container) => {
+      const caption = container.querySelector("caption")?.textContent?.trim() ?? "Data table";
+      container.tabIndex = 0;
+      container.setAttribute("role", "region");
+      container.setAttribute("aria-label", `${caption}, horizontally scrollable`);
+    });
+    routeView.querySelectorAll<HTMLElement>("corva-workflow-board").forEach((board) => {
+      board.tabIndex = 0;
+      board.setAttribute("role", "region");
+      board.setAttribute("aria-label", "Workflow board, horizontally scrollable");
+    });
+  }, 0);
 }
 
 function bindWorkOrderForm() {
@@ -667,7 +693,7 @@ function bindWorkOrderForm() {
 
 lightButton.addEventListener("click", () => setTheme("light"));
 darkButton.addEventListener("click", () => setTheme("dark"));
-sidebar.addEventListener("apexSelect", (event) => {
+sidebar.addEventListener("corvaSelect", (event) => {
   const selected = (event as CustomEvent<RouteId>).detail;
   if (routes.some((route) => route.id === selected)) {
     window.location.hash = routeHref(selected);
