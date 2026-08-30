@@ -11,8 +11,10 @@ describe("Vanilla showcase integrity", () => {
     expect(source).not.toMatch(/apexui|@apexui/i);
   });
 
-  it("keeps six framework-free routes and local media", () => {
-    expect((source.match(/id: "(home|dashboard|work-orders|customers|settings|about)"/g) ?? []).length).toBeGreaterThanOrEqual(6);
+  it("keeps seven framework-free routes and local media", () => {
+    expect((source.match(/id: "(home|dashboard|work-orders|customers|data-table|settings|about)"/g) ?? []).length).toBeGreaterThanOrEqual(7);
+    expect(source).toContain('id="service-grid"');
+    expect(source).toContain('pageable page-size="6"');
     expect(source).toContain("images/northstar-workshop.jpg");
     expect(source).toContain("images/northstar-control-room.jpg");
   });

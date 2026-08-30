@@ -9,6 +9,7 @@ const routes = [
   ["dashboard", "/#/dashboard", "Live metrics for crew capacity", 1],
   ["work-orders", "/#/work-orders", "Create a work order", 0],
   ["customers", "/#/customers", "Pipeline, records", 0],
+  ["data", "/#/data-table", "Dispatch evidence and service performance", 0],
   ["settings", "/#/settings", "Preferences for identity", 0],
   ["about", "/#/about", "Installed packages", 0],
 ] as const;

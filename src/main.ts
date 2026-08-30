@@ -43,7 +43,7 @@ import "@corvaui/web-components/components/corva-workflow-board.js";
 import "./styles.css";
 
 type ThemeMode = "light" | "dark";
-type RouteId = "home" | "dashboard" | "work-orders" | "customers" | "settings" | "about";
+type RouteId = "home" | "dashboard" | "work-orders" | "customers" | "data-table" | "settings" | "about";
 type DataElement<T> = HTMLElement & T;
 type Tone = "info" | "success" | "warning" | "danger";
 
@@ -59,6 +59,7 @@ const routes: RouteDefinition[] = [
   { badge: "Ops", id: "dashboard", label: "Metrics", title: "Metrics dashboard" },
   { badge: "Form", id: "work-orders", label: "Work orders", title: "Work order form" },
   { badge: "CRM", id: "customers", label: "Customers", title: "Customer records" },
+  { badge: "Data", id: "data-table", label: "Service data", title: "Service records data table" },
   { badge: "Admin", id: "settings", label: "Settings", title: "Settings and account" },
   { badge: "Proof", id: "about", label: "About", title: "Package proof" },
 ];
@@ -129,7 +130,7 @@ function setOptions(
 
 function setRows(
   selector: string,
-  columns: Array<{ key: string; header: string }>,
+  columns: Array<{ filterable?: boolean; key: string; header: string; sortable?: boolean }>,
   rows: Array<Record<string, string | number | boolean | null | undefined>>,
 ) {
   const element = routeView.querySelector(selector) as DataElement<{
@@ -398,6 +399,53 @@ const templates: Record<RouteId, () => string> = {
       `,
     ),
 
+  "data-table": () =>
+    pageShell(
+      "data-table",
+      "Service intelligence",
+      "Dispatch evidence and service performance in one auditable register.",
+      "Operations leads can sort ownership, filter risk, compare SLA performance, and page through realistic service records without leaving the workspace.",
+      `
+        <corva-toolbar label="Service data controls" justify="between" wrap>
+          <corva-search-form label="Search service records" placeholder="Order, account, owner, or region"></corva-search-form>
+          <corva-badge tone="success">96% records complete</corva-badge>
+          <corva-button size="sm" variant="secondary">Export register</corva-button>
+        </corva-toolbar>
+
+        <div class="metric-strip">
+          <corva-card eyebrow="Open records" heading="148">
+            <corva-progress label="Assigned to an owner" value="94"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="SLA protected" heading="91%">
+            <corva-progress label="Within committed window" value="91"></corva-progress>
+          </corva-card>
+          <corva-card eyebrow="Evidence ready" heading="132">
+            <corva-progress label="Complete closeout packet" value="89"></corva-progress>
+          </corva-card>
+        </div>
+
+        <div class="split-grid wide-left">
+          <corva-data-grid id="service-grid" caption="Regional service records" sortable filterable pageable page-size="6"></corva-data-grid>
+          <corva-paper>
+            <corva-stack gap="md">
+              <corva-typography as="h2" variant="title">Register health</corva-typography>
+              <div class="detail-row"><span>Last synchronized</span><strong>07:42 ET</strong></div>
+              <div class="detail-row"><span>Missing evidence</span><strong>16 records</strong></div>
+              <div class="detail-row"><span>Owner conflicts</span><strong>3 records</strong></div>
+              <div class="section-rule" role="presentation"></div>
+              <corva-list>
+                <li class="corva-list-item"><span>Coastal access records reconciled</span><corva-badge tone="success">Ready</corva-badge></li>
+                <li class="corva-list-item"><span>Central relay photos awaiting review</span><corva-badge tone="warning">Review</corva-badge></li>
+                <li class="corva-list-item"><span>North crew ownership normalized</span><corva-badge tone="info">Synced</corva-badge></li>
+              </corva-list>
+            </corva-stack>
+          </corva-paper>
+        </div>
+
+        <corva-alert tone="info" heading="CorvaUI DataGrid proof">Sorting, filtering, pagination, keyboard access, and token-aware states are provided by the published CorvaUI web component.</corva-alert>
+      `,
+    ),
+
   settings: () =>
     pageShell(
       "settings",
@@ -566,6 +614,30 @@ function configureRoute(route: RouteId) {
       { id: "proposal", items: [{ id: "acct-42", meta: "$132k", title: "Crownline Health expansion" }], title: "Proposal" },
       { id: "renewal", items: [{ id: "acct-17", meta: "Sep 30", title: "Harborline rescue plan" }], title: "Renewal" },
     ]);
+  }
+
+  if (route === "data-table") {
+    setRows(
+      "#service-grid",
+      [
+        { filterable: true, key: "order", header: "Order", sortable: true },
+        { filterable: true, key: "account", header: "Account", sortable: true },
+        { filterable: true, key: "region", header: "Region", sortable: true },
+        { filterable: true, key: "owner", header: "Owner", sortable: true },
+        { filterable: true, key: "status", header: "Status", sortable: true },
+        { key: "sla", header: "SLA", sortable: true },
+      ],
+      [
+        { account: "Harborline Utilities", order: "WO-1842", owner: "Maya Chen", region: "North", sla: "96%", status: "Access check" },
+        { account: "PrairieCare Campuses", order: "WO-1847", owner: "Omar Haddad", region: "Central", sla: "82%", status: "Parts hold" },
+        { account: "MetroGrid Facilities", order: "WO-1851", owner: "Elena Rossi", region: "South", sla: "99%", status: "Ready" },
+        { account: "Crownline Health", order: "WO-1856", owner: "Jon Bell", region: "Coastal", sla: "88%", status: "Safety packet" },
+        { account: "Riverbend Transit", order: "WO-1859", owner: "Priya Kapoor", region: "Central", sla: "93%", status: "Scheduled" },
+        { account: "Northwind Schools", order: "WO-1860", owner: "Maya Chen", region: "North", sla: "97%", status: "In field" },
+        { account: "Aster Medical", order: "WO-1861", owner: "Elena Rossi", region: "South", sla: "91%", status: "Evidence review" },
+        { account: "Cobalt Manufacturing", order: "WO-1862", owner: "Omar Haddad", region: "Coastal", sla: "86%", status: "Quote approval" },
+      ],
+    );
   }
 
   if (route === "settings") {
