@@ -12,8 +12,8 @@
     "test": "npm run test:unit && npm run build && npm run test:e2e"
   },
   "dependencies": {
-    "@corvaui/tokens": "^0.1.7",
-    "@corvaui/web-components": "^0.1.7",
+    "@corvaui/tokens": "^0.1.8",
+    "@corvaui/web-components": "^0.1.8",
     "typescript": "^5.8.3",
     "vite": "^8.2.2"
   },

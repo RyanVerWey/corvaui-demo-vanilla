@@ -6,8 +6,8 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
 
 describe("Vanilla showcase integrity", () => {
   it("uses only published CorvaUI packages", () => {
-    expect(pkg.dependencies["@corvaui/web-components"]).toBe("^0.1.7");
-    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.1.7");
+    expect(pkg.dependencies["@corvaui/web-components"]).toBe("^0.1.8");
+    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.1.8");
     expect(source).not.toMatch(/apexui|@apexui/i);
   });
 
