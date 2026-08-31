@@ -38,3 +38,14 @@ test("Indigo dark mode stays selected", async ({ page }) => {
   await page.locator("#theme-dark").click();
   await expect(page.locator("#app-shell")).toHaveAttribute("data-corva-theme", "indigo-dark");
 });
+
+test("dashboard renders three distinct Indigo chart series", async ({ page }) => {
+  await page.goto("/#/dashboard", { waitUntil: "networkidle" });
+  const legend = page.getByRole("group", { name: "Crew capacity by region series" });
+  await expect(legend).toBeVisible();
+  await expect(page.locator(".corva-chart-legend-item")).toHaveCount(3);
+  const colors = await page.locator(".corva-chart-swatch").evaluateAll((nodes) =>
+    nodes.map((node) => getComputedStyle(node).backgroundColor),
+  );
+  expect(new Set(colors).size).toBe(3);
+});
