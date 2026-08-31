@@ -1,46 +1,8 @@
 import "@corvaui/tokens/css";
-import "@corvaui/web-components/components/corva-accordion.js";
-import "@corvaui/web-components/components/corva-alert.js";
-import "@corvaui/web-components/components/corva-app-bar.js";
-import "@corvaui/web-components/components/corva-autocomplete.js";
-import "@corvaui/web-components/components/corva-badge.js";
-import "@corvaui/web-components/components/corva-breadcrumbs.js";
-import "@corvaui/web-components/components/corva-button.js";
-import "@corvaui/web-components/components/corva-button-group.js";
-import "@corvaui/web-components/components/corva-calendar.js";
-import "@corvaui/web-components/components/corva-card.js";
-import "@corvaui/web-components/components/corva-chart.js";
-import "@corvaui/web-components/components/corva-checkbox.js";
-import "@corvaui/web-components/components/corva-chip.js";
-import "@corvaui/web-components/components/corva-data-grid.js";
-import "@corvaui/web-components/components/corva-data-table.js";
-import "@corvaui/web-components/components/corva-date-picker.js";
-import "@corvaui/web-components/components/corva-divider.js";
-import "@corvaui/web-components/components/corva-file-upload.js";
-import "@corvaui/web-components/components/corva-list.js";
-import "@corvaui/web-components/components/corva-number-field.js";
-import "@corvaui/web-components/components/corva-paper.js";
-import "@corvaui/web-components/components/corva-progress.js";
-import "@corvaui/web-components/components/corva-radio-group.js";
-import "@corvaui/web-components/components/corva-search-form.js";
-import "@corvaui/web-components/components/corva-select.js";
-import "@corvaui/web-components/components/corva-sidebar.js";
-import "@corvaui/web-components/components/corva-slider.js";
-import "@corvaui/web-components/components/corva-snackbar.js";
-import "@corvaui/web-components/components/corva-stack.js";
-import "@corvaui/web-components/components/corva-stepper.js";
-import "@corvaui/web-components/components/corva-switch.js";
-import "@corvaui/web-components/components/corva-tabs.js";
-import "@corvaui/web-components/components/corva-text-field.js";
-import "@corvaui/web-components/components/corva-textarea.js";
-import "@corvaui/web-components/components/corva-time-picker.js";
-import "@corvaui/web-components/components/corva-timeline.js";
-import "@corvaui/web-components/components/corva-toggle-group.js";
-import "@corvaui/web-components/components/corva-toolbar.js";
-import "@corvaui/web-components/components/corva-tree-view.js";
-import "@corvaui/web-components/components/corva-typography.js";
-import "@corvaui/web-components/components/corva-workflow-board.js";
+import { defineCorvaUI } from "@corvaui/vanilla";
 import "./styles.css";
+
+await defineCorvaUI();
 
 type ThemeMode = "light" | "dark";
 type RouteId = "home" | "dashboard" | "work-orders" | "customers" | "data-table" | "settings" | "about";
@@ -143,10 +105,15 @@ function setRows(
   }
 }
 
-function setChart(selector: string, data: Array<{ label: string; value: number }>) {
-  const element = routeView.querySelector(selector) as DataElement<{ data?: typeof data }> | null;
+function setChart(
+  selector: string,
+  data: Array<Record<string, string | number>>,
+  series?: Array<{ key: string; label: string; color: string }>,
+) {
+  const element = routeView.querySelector(selector) as DataElement<{ data?: typeof data; series?: typeof series }> | null;
   if (element) {
     element.data = data;
+    if (series) element.series = series;
   }
 }
 
@@ -301,7 +268,7 @@ const templates: Record<RouteId, () => string> = {
           <corva-card eyebrow="Safety packet" heading="19 gaps">
             <corva-progress label="Orders ready for dispatch" value="69"></corva-progress>
           </corva-card>
-          <corva-chart id="dashboard-chart" label="Crew capacity by region"></corva-chart>
+          <corva-chart id="dashboard-chart" label="Crew capacity by region" type="area"></corva-chart>
         </div>
 
         <figure class="dashboard-photo">
@@ -526,10 +493,14 @@ function configureRoute(route: RouteId) {
 
   if (route === "dashboard") {
     setChart("#dashboard-chart", [
-      { label: "North", value: 88 },
-      { label: "Central", value: 73 },
-      { label: "South", value: 81 },
-      { label: "Coastal", value: 66 },
+      { label: "North", available: 88, assigned: 76, target: 84 },
+      { label: "Central", available: 73, assigned: 68, target: 78 },
+      { label: "South", available: 81, assigned: 72, target: 80 },
+      { label: "Coastal", available: 66, assigned: 61, target: 74 },
+    ], [
+      { key: "available", label: "Available", color: "var(--corva-color-chart-series-1)" },
+      { key: "assigned", label: "Assigned", color: "var(--corva-color-chart-series-4)" },
+      { key: "target", label: "Target", color: "var(--corva-color-chart-series-5)" },
     ]);
     setRows(
       "#dashboard-table",
@@ -681,7 +652,7 @@ function configureRoute(route: RouteId) {
         { key: "proof", header: "Proof" },
       ],
       [
-        { package: "@corvaui/web-components", proof: "Direct custom element imports", usage: "Controls and data display" },
+        { package: "@corvaui/vanilla", proof: "Typed full registration", usage: "Controls and data display" },
         { package: "@corvaui/tokens", proof: "data-corva-theme scope", usage: "Indigo light/dark themes" },
         { package: "vite", proof: "Static Vercel build", usage: "Vanilla TypeScript bundling" },
       ],
@@ -698,7 +669,7 @@ function configureRoute(route: RouteId) {
       tree.items = [
         {
           children: [
-            { id: "components", label: "@corvaui/web-components" },
+            { id: "components", label: "@corvaui/vanilla" },
             { id: "tokens", label: "@corvaui/tokens/css" },
           ],
           id: "packages",
