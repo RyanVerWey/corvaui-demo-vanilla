@@ -6,8 +6,8 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
 
 describe("Vanilla showcase integrity", () => {
   it("uses only published CorvaUI packages", () => {
-    expect(pkg.dependencies["@corvaui/web-components"]).toBe("^0.1.8");
-    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.1.8");
+    expect(pkg.dependencies["@corvaui/vanilla"]).toBe("^0.2.1");
+    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.2.1");
     expect(source).not.toMatch(/apexui|@apexui/i);
   });
 
@@ -17,5 +17,8 @@ describe("Vanilla showcase integrity", () => {
     expect(source).toContain('pageable page-size="6"');
     expect(source).toContain("images/northstar-workshop.jpg");
     expect(source).toContain("images/northstar-control-room.jpg");
+    expect(source).toContain("Synthetic demo data");
+    expect(source).toContain("await defineCorvaUI()");
+    expect(source).not.toContain('from "@corvaui/web-components');
   });
 });
