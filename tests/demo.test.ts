@@ -7,7 +7,10 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
 describe("Vanilla showcase integrity", () => {
   it("uses only published CorvaUI packages", () => {
     expect(pkg.dependencies["@corvaui/vanilla"]).toBe("^0.2.1");
+    expect(pkg.dependencies["@corvaui/web-components"]).toBeUndefined();
     expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.2.1");
+    expect(source).toContain('from "@corvaui/vanilla"');
+    expect(source).toContain("available: 88");
     expect(source).not.toMatch(/apexui|@apexui/i);
   });
 

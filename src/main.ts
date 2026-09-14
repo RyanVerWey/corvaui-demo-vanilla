@@ -107,10 +107,15 @@ function setRows(
   }
 }
 
-function setChart(selector: string, data: Array<{ label: string; value: number }>) {
-  const element = routeView.querySelector(selector) as DataElement<{ data?: typeof data }> | null;
+function setChart(
+  selector: string,
+  data: Array<Record<string, string | number>>,
+  series?: Array<{ key: string; label: string; color: string }>,
+) {
+  const element = routeView.querySelector(selector) as DataElement<{ data?: typeof data; series?: typeof series }> | null;
   if (element) {
     element.data = data;
+    if (series) element.series = series;
   }
 }
 
@@ -267,7 +272,7 @@ const templates: Record<RouteId, () => string> = {
           <corva-card eyebrow="Safety packet" heading="19 gaps">
             <corva-progress label="Orders ready for dispatch" value="69"></corva-progress>
           </corva-card>
-          <corva-chart id="dashboard-chart" label="Crew capacity by region"></corva-chart>
+          <corva-chart id="dashboard-chart" label="Crew capacity by region" type="area"></corva-chart>
         </div>
 
         <figure class="dashboard-photo">
@@ -492,10 +497,14 @@ function configureRoute(route: RouteId) {
 
   if (route === "dashboard") {
     setChart("#dashboard-chart", [
-      { label: "North", value: 88 },
-      { label: "Central", value: 73 },
-      { label: "South", value: 81 },
-      { label: "Coastal", value: 66 },
+      { label: "North", available: 88, assigned: 76, target: 84 },
+      { label: "Central", available: 73, assigned: 68, target: 78 },
+      { label: "South", available: 81, assigned: 72, target: 80 },
+      { label: "Coastal", available: 66, assigned: 61, target: 74 },
+    ], [
+      { key: "available", label: "Available", color: "var(--corva-color-chart-series-1)" },
+      { key: "assigned", label: "Assigned", color: "var(--corva-color-chart-series-4)" },
+      { key: "target", label: "Target", color: "var(--corva-color-chart-series-5)" },
     ]);
     setRows(
       "#dashboard-table",
