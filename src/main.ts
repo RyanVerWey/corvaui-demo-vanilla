@@ -1,8 +1,82 @@
 import "@corvaui/tokens/css";
-import { defineCorvaUI } from "@corvaui/vanilla";
+import {
+  defineCorvaAlert,
+  defineCorvaAppBar,
+  defineCorvaAutocomplete,
+  defineCorvaBadge,
+  defineCorvaBreadcrumbs,
+  defineCorvaButton,
+  defineCorvaButtonGroup,
+  defineCorvaCalendar,
+  defineCorvaCard,
+  defineCorvaChart,
+  defineCorvaCheckbox,
+  defineCorvaDataGrid,
+  defineCorvaDataTable,
+  defineCorvaDatePicker,
+  defineCorvaFileUpload,
+  defineCorvaList,
+  defineCorvaPaper,
+  defineCorvaProgress,
+  defineCorvaRadioGroup,
+  defineCorvaSearchForm,
+  defineCorvaSelect,
+  defineCorvaSidebar,
+  defineCorvaSlider,
+  defineCorvaSnackbar,
+  defineCorvaStack,
+  defineCorvaStepper,
+  defineCorvaSwitch,
+  defineCorvaTabs,
+  defineCorvaTextField,
+  defineCorvaTextarea,
+  defineCorvaTimePicker,
+  defineCorvaTimeline,
+  defineCorvaToggleGroup,
+  defineCorvaToolbar,
+  defineCorvaTreeView,
+  defineCorvaTypography,
+  defineCorvaWorkflowBoard,
+} from "@corvaui/vanilla/components";
 import "./styles.css";
 
-await defineCorvaUI();
+defineCorvaAlert();
+defineCorvaAppBar();
+defineCorvaAutocomplete();
+defineCorvaBadge();
+defineCorvaBreadcrumbs();
+defineCorvaButton();
+defineCorvaButtonGroup();
+defineCorvaCalendar();
+defineCorvaCard();
+defineCorvaChart();
+defineCorvaCheckbox();
+defineCorvaDataGrid();
+defineCorvaDataTable();
+defineCorvaDatePicker();
+defineCorvaFileUpload();
+defineCorvaList();
+defineCorvaPaper();
+defineCorvaProgress();
+defineCorvaRadioGroup();
+defineCorvaSearchForm();
+defineCorvaSelect();
+defineCorvaSidebar();
+defineCorvaSlider();
+defineCorvaSnackbar();
+defineCorvaStack();
+defineCorvaStepper();
+defineCorvaSwitch();
+defineCorvaTabs();
+defineCorvaTextField();
+defineCorvaTextarea();
+defineCorvaTimePicker();
+defineCorvaTimeline();
+defineCorvaToggleGroup();
+defineCorvaToolbar();
+defineCorvaTreeView();
+defineCorvaTypography();
+defineCorvaWorkflowBoard();
 
 type ThemeMode = "light" | "dark";
 type RouteId = "home" | "dashboard" | "work-orders" | "customers" | "data-table" | "settings" | "about";

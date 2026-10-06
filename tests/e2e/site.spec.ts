@@ -19,12 +19,26 @@ for (const [name, path, content, imageCount] of routes) {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
+    page.on("response", (response) => {
+      if (response.status() >= 400 && /\.entry\.js(?:\?|$)/.test(response.url())) {
+        errors.push(`${response.status()} ${response.url()}`);
+      }
+    });
     await page.goto(path, { waitUntil: "networkidle" });
     expect(await page.evaluate(() => window.innerWidth)).toBe(testInfo.project.name === "mobile" ? 320 : 1440);
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByText("Synthetic demo data", { exact: true })).toBeVisible();
     await expect(page.getByText(content, { exact: false }).first()).toBeVisible();
     await expect(page.locator("#route-view img")).toHaveCount(imageCount);
+    const componentState = await page.evaluate(() => {
+      const elements = [...document.querySelectorAll("*")].filter((element) => element.localName.startsWith("corva-"));
+      return {
+        undefinedTags: [...new Set(elements.filter((element) => !customElements.get(element.localName)).map((element) => element.localName))],
+        unhydratedTags: [...new Set(elements.filter((element) => !element.classList.contains("hydrated")).map((element) => element.localName))],
+      };
+    });
+    expect(componentState.undefinedTags).toEqual([]);
+    expect(componentState.unhydratedTags).toEqual([]);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
     await page.addScriptTag({ path: axePath });
