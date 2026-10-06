@@ -171,6 +171,8 @@ corva-toolbar {
 }
 
 .immersive-hero-copy corva-typography {
+  --corva-color-text: #fff;
+  --corva-color-muted: #e8eaf3;
   color: #fff;
 }
 

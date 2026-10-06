@@ -1,8 +1,82 @@
 import "@corvaui/tokens/css";
-import { defineCorvaUI } from "@corvaui/vanilla";
+import {
+  defineCorvaAlert,
+  defineCorvaAppBar,
+  defineCorvaAutocomplete,
+  defineCorvaBadge,
+  defineCorvaBreadcrumbs,
+  defineCorvaButton,
+  defineCorvaButtonGroup,
+  defineCorvaCalendar,
+  defineCorvaCard,
+  defineCorvaChart,
+  defineCorvaCheckbox,
+  defineCorvaDataGrid,
+  defineCorvaDataTable,
+  defineCorvaDatePicker,
+  defineCorvaFileUpload,
+  defineCorvaList,
+  defineCorvaPaper,
+  defineCorvaProgress,
+  defineCorvaRadioGroup,
+  defineCorvaSearchForm,
+  defineCorvaSelect,
+  defineCorvaSidebar,
+  defineCorvaSlider,
+  defineCorvaSnackbar,
+  defineCorvaStack,
+  defineCorvaStepper,
+  defineCorvaSwitch,
+  defineCorvaTabs,
+  defineCorvaTextField,
+  defineCorvaTextarea,
+  defineCorvaTimePicker,
+  defineCorvaTimeline,
+  defineCorvaToggleGroup,
+  defineCorvaToolbar,
+  defineCorvaTreeView,
+  defineCorvaTypography,
+  defineCorvaWorkflowBoard,
+} from "@corvaui/vanilla/components";
 import "./styles.css";
 
-await defineCorvaUI();
+defineCorvaAlert();
+defineCorvaAppBar();
+defineCorvaAutocomplete();
+defineCorvaBadge();
+defineCorvaBreadcrumbs();
+defineCorvaButton();
+defineCorvaButtonGroup();
+defineCorvaCalendar();
+defineCorvaCard();
+defineCorvaChart();
+defineCorvaCheckbox();
+defineCorvaDataGrid();
+defineCorvaDataTable();
+defineCorvaDatePicker();
+defineCorvaFileUpload();
+defineCorvaList();
+defineCorvaPaper();
+defineCorvaProgress();
+defineCorvaRadioGroup();
+defineCorvaSearchForm();
+defineCorvaSelect();
+defineCorvaSidebar();
+defineCorvaSlider();
+defineCorvaSnackbar();
+defineCorvaStack();
+defineCorvaStepper();
+defineCorvaSwitch();
+defineCorvaTabs();
+defineCorvaTextField();
+defineCorvaTextarea();
+defineCorvaTimePicker();
+defineCorvaTimeline();
+defineCorvaToggleGroup();
+defineCorvaToolbar();
+defineCorvaTreeView();
+defineCorvaTypography();
+defineCorvaWorkflowBoard();
 
 type ThemeMode = "light" | "dark";
 type RouteId = "home" | "dashboard" | "work-orders" | "customers" | "data-table" | "settings" | "about";
@@ -36,7 +110,9 @@ const sidebar = document.querySelector("#nav") as DataElement<{
   items?: Array<{ badge?: string; href?: string; id: string; label: string }>;
 }>;
 const snackbar = document.querySelector("#snackbar") as DataElement<{ open?: boolean; tone?: Tone }>;
+const snackbarMessage = document.querySelector("#snackbar-message") as HTMLElement;
 const mobileNav = document.querySelector("#mobile-nav") as HTMLElement;
+const mobileMenu = document.querySelector(".mobile-menu") as HTMLDetailsElement;
 
 snackbar.open = false;
 sidebar.items = routes.map((route) => ({
@@ -72,7 +148,7 @@ function setTheme(mode: ThemeMode) {
 }
 
 function notify(message: string, tone: Tone = "success") {
-  snackbar.textContent = message;
+  snackbarMessage.textContent = message;
   snackbar.tone = tone;
   snackbar.open = false;
   window.setTimeout(() => {
@@ -155,6 +231,7 @@ function render() {
     else link.removeAttribute("aria-current");
   });
   routeView.innerHTML = templates[route]();
+  mobileMenu.open = false;
   setBreadcrumbs(definition);
   configureRoute(route);
   routeView.scrollTo({ top: 0 });
@@ -166,6 +243,7 @@ function pageShell(route: RouteId, eyebrow: string, title: string, body: string,
       <corva-breadcrumbs id="breadcrumbs" label="Page trail"></corva-breadcrumbs>
       <div class="page-heading">
         <corva-stack gap="sm">
+          <corva-badge tone="neutral">Synthetic demo data</corva-badge>
           <corva-badge tone="info">${eyebrow}</corva-badge>
           <corva-typography as="h1" variant="display">${title}</corva-typography>
           <corva-typography variant="body">${body}</corva-typography>
@@ -195,7 +273,7 @@ const templates: Record<RouteId, () => string> = {
         <section class="immersive-hero" aria-labelledby="northstar-story-title">
           <img src="/images/northstar-workshop.jpg" alt="A mobile field workshop prepared with tools and service equipment" />
           <div class="immersive-hero-copy">
-            <corva-badge tone="success">Field network online</corva-badge>
+            <corva-badge tone="success">Deterministic field preview</corva-badge>
             <corva-typography id="northstar-story-title" as="h2" variant="title">One operating desk from first call to verified closeout.</corva-typography>
             <corva-typography variant="body">Dispatchers see capacity, technicians receive complete work packets, and leaders see risk without adding a framework runtime.</corva-typography>
             <div class="hero-actions">
@@ -249,13 +327,13 @@ const templates: Record<RouteId, () => string> = {
     pageShell(
       "dashboard",
       "Operations command",
-      "Live metrics for crew capacity, SLA risk, and daily closeout.",
+      "Sample metrics for crew capacity, SLA risk, and daily closeout.",
       "This route uses charts, tables, progress, workflow status, and scheduling widgets to model a real dispatcher dashboard.",
       `
         <corva-toolbar label="Dashboard actions" justify="between" wrap>
           <corva-button size="sm" id="refresh-dashboard">Refresh signals</corva-button>
           <corva-button size="sm" variant="secondary">Export board</corva-button>
-          <corva-badge tone="success">07:42 sync</corva-badge>
+          <corva-badge tone="success">Fixture snapshot · 07:42</corva-badge>
         </corva-toolbar>
 
         <div class="dashboard-grid">
@@ -396,7 +474,7 @@ const templates: Record<RouteId, () => string> = {
           <corva-paper>
             <corva-stack gap="md">
               <corva-typography as="h2" variant="title">Register health</corva-typography>
-              <div class="detail-row"><span>Last synchronized</span><strong>07:42 ET</strong></div>
+              <div class="detail-row"><span>Fixture snapshot</span><strong>07:42 ET</strong></div>
               <div class="detail-row"><span>Missing evidence</span><strong>16 records</strong></div>
               <div class="detail-row"><span>Owner conflicts</span><strong>3 records</strong></div>
               <div class="section-rule" role="presentation"></div>
@@ -652,7 +730,7 @@ function configureRoute(route: RouteId) {
         { key: "proof", header: "Proof" },
       ],
       [
-        { package: "@corvaui/vanilla", proof: "Typed full registration", usage: "Controls and data display" },
+        { package: "@corvaui/vanilla", proof: "Typed selected-component registration", usage: "Controls and data display" },
         { package: "@corvaui/tokens", proof: "data-corva-theme scope", usage: "Indigo light/dark themes" },
         { package: "vite", proof: "Static Vercel build", usage: "Vanilla TypeScript bundling" },
       ],

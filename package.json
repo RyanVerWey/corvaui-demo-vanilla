@@ -7,9 +7,10 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc && vite build",
     "preview": "vite preview --host 127.0.0.1",
+    "test:static": "node scripts/check-static-output.mjs",
     "test:unit": "vitest run tests/demo.test.ts",
-    "test:e2e": "playwright test",
-    "test": "npm run test:unit && npm run build && npm run test:e2e"
+    "test:e2e": "npm run build && npm run test:static && playwright test",
+    "test": "npm audit && npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@corvaui/tokens": "^0.2.1",

@@ -1,6 +1,6 @@
 # CorvaUI Vanilla Demo
 
-Public Vercel demo using CorvaUI custom elements without a framework. Northstar Field Services is a seven-route operations product with image-led marketing, metrics, work-order intake, customer records, a sortable and filterable service DataGrid, settings, and package proof.
+Public Vercel demo using the first-class `@corvaui/vanilla` registration helper and CorvaUI custom elements without a framework. Northstar Field Services is a seven-route operations product with image-led marketing, metrics, work-order intake, customer records, a sortable and filterable service DataGrid, settings, and package proof. All displayed business data is deterministic and synthetic.
 
 ## Routes
 
@@ -14,4 +14,4 @@ Public Vercel demo using CorvaUI custom elements without a framework. Northstar 
 
 ## Quality Gate
 
-Run `npm test` for unit assertions, a production build, and desktop/mobile Playwright checks covering responsive overflow and WCAG AA accessibility.
+Run `npm test` for the dependency audit, unit assertions, production build, and desktop/320px Playwright checks covering both themes, browser navigation, responsive overflow, runtime errors, and WCAG AA accessibility.
