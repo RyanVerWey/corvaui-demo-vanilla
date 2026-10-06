@@ -13,6 +13,8 @@ describe("Vanilla showcase integrity", () => {
     expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.2.1");
     expect(source).toContain('from "@corvaui/vanilla/components"');
     expect(source).not.toContain("defineCorvaUI");
+    expect(source).toContain("Typed selected-component registration");
+    expect(source).not.toContain("Typed full registration");
     const componentTags = [...new Set([...`${shell}\n${source}`.matchAll(/<(corva-[a-z-]+)/g)].map((match) => match[1]))];
     for (const tag of componentTags) {
       expect(source).toContain(`${definitionName(tag)}();`);

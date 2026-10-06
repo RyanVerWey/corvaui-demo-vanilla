@@ -730,7 +730,7 @@ function configureRoute(route: RouteId) {
         { key: "proof", header: "Proof" },
       ],
       [
-        { package: "@corvaui/vanilla", proof: "Typed full registration", usage: "Controls and data display" },
+        { package: "@corvaui/vanilla", proof: "Typed selected-component registration", usage: "Controls and data display" },
         { package: "@corvaui/tokens", proof: "data-corva-theme scope", usage: "Indigo light/dark themes" },
         { package: "vite", proof: "Static Vercel build", usage: "Vanilla TypeScript bundling" },
       ],
